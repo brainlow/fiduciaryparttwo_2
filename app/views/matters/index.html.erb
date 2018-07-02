@@ -28,8 +28,11 @@
         <td><%= matter.county %></td>
         <td>
           <a href="/matters/<%= matter.id %>" class="btn btn-primary">Show</a>
-          <a href="/matters/<%= matter.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_matter/<%= matter.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          
+          <% if current_user == matter.user %>
+            <a href="/matters/<%= matter.id %>/edit" class="btn btn-warning">Edit</a>
+            <a href="/delete_matter/<%= matter.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <% end %>
         </td>
       </tr>
       <% end %>

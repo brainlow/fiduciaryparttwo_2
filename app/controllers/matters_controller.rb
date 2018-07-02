@@ -1,4 +1,14 @@
 class MattersController < ApplicationController
+  before_action :current_user_must_be_matter_user, :only => [:edit, :update, :destroy]
+
+  def current_user_must_be_matter_user
+    matter = Matter.find(params[:id])
+
+    unless current_user == matter.user
+      redirect_to :back, :alert => "You are not authorized for that."
+    end
+  end
+
   def index
     @matters = Matter.all
 
