@@ -10,7 +10,7 @@ class MattersController < ApplicationController
   end
 
   def index
-    @matters = Matter.all
+    @matters = current_user.matters.page(params[:page]).per(10)
 
     render("matters/index.html.erb")
   end
