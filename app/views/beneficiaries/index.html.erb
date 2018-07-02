@@ -21,7 +21,7 @@
         <td><%= beneficiary.first_name %></td>
         <td><%= beneficiary.last_name %></td>
         <td><%= beneficiary.address %></td>
-        <td><%= beneficiary.matter_id %></td>
+        <td><%= beneficiary.matter.matter_type %></td>
         <td>
           <a href="/beneficiaries/<%= beneficiary.id %>" class="btn btn-primary">Show</a>
           <a href="/beneficiaries/<%= beneficiary.id %>/edit" class="btn btn-warning">Edit</a>
