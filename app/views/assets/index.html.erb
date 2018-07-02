@@ -22,7 +22,7 @@
 
       <% @assets.each do |asset| %>
       <tr>
-        <td><%= asset.matter_id %></td>
+        <td><%= asset.matter.matter_type %></td>
         <td><%= asset.beg_value %></td>
         <td><%= asset.end_value %></td>
         <td><%= asset.description %></td>
