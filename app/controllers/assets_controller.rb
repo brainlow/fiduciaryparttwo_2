@@ -1,6 +1,7 @@
 class AssetsController < ApplicationController
   def index
-    @assets = Asset.page(params[:page]).per(10)
+    @q = Asset.ransack(params[:q])
+    @assets = @q.result(:distinct => true).includes(:matter).page(params[:page]).per(10)
 
     render("assets/index.html.erb")
   end

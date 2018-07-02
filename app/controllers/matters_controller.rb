@@ -10,7 +10,8 @@ class MattersController < ApplicationController
   end
 
   def index
-    @matters = current_user.matters.page(params[:page]).per(10)
+    @q = current_user.matters.ransack(params[:q])
+    @matters = @q.result(:distinct => true).includes(:user, :assets, :fiduciaries, :beneficiaries).page(params[:page]).per(10)
 
     render("matters/index.html.erb")
   end
