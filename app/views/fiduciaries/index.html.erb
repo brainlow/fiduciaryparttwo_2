@@ -21,7 +21,7 @@
         <td><%= fiduciary.first_name %></td>
         <td><%= fiduciary.last_name %></td>
         <td><%= fiduciary.address %></td>
-        <td><%= fiduciary.matter_id %></td>
+        <td><%= fiduciary.matter.matter_type %></td>
         <td>
           <a href="/fiduciaries/<%= fiduciary.id %>" class="btn btn-primary">Show</a>
           <a href="/fiduciaries/<%= fiduciary.id %>/edit" class="btn btn-warning">Edit</a>
