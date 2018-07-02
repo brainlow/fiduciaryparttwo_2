@@ -1,0 +1,82 @@
+<!-- Validation failure messages -->
+<% if @matter.errors.any? %>
+  <% @matter.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Matter</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_matter" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for matter_type -->
+      <div class="form-group">
+        <label for="matter_type" class="control-label">
+          Matter type
+        </label>
+
+        <input type="text" id="matter_type" name="matter_type" placeholder="Matter type" class="form-control" value="<%= @matter.matter_type %>">
+      </div>
+
+      <!-- Label and input for matter_name -->
+      <div class="form-group">
+        <label for="matter_name" class="control-label">
+          Matter name
+        </label>
+
+        <input type="text" id="matter_name" name="matter_name" placeholder="Matter name" class="form-control" value="<%= @matter.matter_name %>">
+      </div>
+
+      <!-- Label and input for matter_number -->
+      <div class="form-group">
+        <label for="matter_number" class="control-label">
+          Matter number
+        </label>
+
+        <input type="text" id="matter_number" name="matter_number" placeholder="Matter number" class="form-control" value="<%= @matter.matter_number %>">
+      </div>
+
+      <!-- Label and input for user_id -->
+      <div class="form-group">
+        <label for="user_id" class="control-label">
+          User
+        </label>
+
+        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @matter.user_id %>">
+      </div>
+
+      <!-- Label and input for state -->
+      <div class="form-group">
+        <label for="state" class="control-label">
+          State
+        </label>
+
+        <input type="text" id="state" name="state" placeholder="State" class="form-control" value="<%= @matter.state %>">
+      </div>
+
+      <!-- Label and input for county -->
+      <div class="form-group">
+        <label for="county" class="control-label">
+          County
+        </label>
+
+        <input type="text" id="county" name="county" placeholder="County" class="form-control" value="<%= @matter.county %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Matter
+      </button>
+      or
+      <a href="/matters">Cancel</a>
+    </form>
+  </div>
+</div>

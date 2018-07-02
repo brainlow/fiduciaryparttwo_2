@@ -1,0 +1,40 @@
+<div class="page-header">
+  <h3>Matter #<%= @matter.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Matter type</dt>
+      <dd><%= @matter.matter_type %></dd>
+
+      <dt>Matter name</dt>
+      <dd><%= @matter.matter_name %></dd>
+
+      <dt>Matter number</dt>
+      <dd><%= @matter.matter_number %></dd>
+
+      <dt>User</dt>
+      <dd><%= @matter.user_id %></dd>
+
+      <dt>State</dt>
+      <dd><%= @matter.state %></dd>
+
+      <dt>County</dt>
+      <dd><%= @matter.county %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/matters" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/matters/<%= @matter.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_matter/<%= @matter.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>
