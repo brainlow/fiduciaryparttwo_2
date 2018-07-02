@@ -1,0 +1,46 @@
+<div class="page-header">
+  <h3>Transaction #<%= @transaction.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Asset</dt>
+      <dd><%= @transaction.asset_id %></dd>
+
+      <dt>Shares</dt>
+      <dd><%= @transaction.shares %></dd>
+
+      <dt>Date</dt>
+      <dd><%= @transaction.date %></dd>
+
+      <dt>Amount</dt>
+      <dd><%= @transaction.amount %></dd>
+
+      <dt>Category</dt>
+      <dd><%= @transaction.category %></dd>
+
+      <dt>Description</dt>
+      <dd><%= @transaction.description %></dd>
+
+      <dt>Payee</dt>
+      <dd><%= @transaction.payee %></dd>
+
+      <dt>Distribution</dt>
+      <dd><%= @transaction.distribution %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/transactions" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/transactions/<%= @transaction.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_transaction/<%= @transaction.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

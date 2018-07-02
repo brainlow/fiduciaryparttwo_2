@@ -1,0 +1,42 @@
+<div class="page-header">
+  <h1>
+    Transactions
+    <a href="/transactions/new" class="btn btn-lg btn-success">New Transaction</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Asset</th>
+        <th>Shares</th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Payee</th>
+        <th>Distribution</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.asset_id %></td>
+        <td><%= transaction.shares %></td>
+        <td><%= transaction.date %></td>
+        <td><%= transaction.amount %></td>
+        <td><%= transaction.category %></td>
+        <td><%= transaction.description %></td>
+        <td><%= transaction.payee %></td>
+        <td><%= transaction.distribution %></td>
+        <td>
+          <a href="/transactions/<%= transaction.id %>" class="btn btn-primary">Show</a>
+          <a href="/transactions/<%= transaction.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_transaction/<%= transaction.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
