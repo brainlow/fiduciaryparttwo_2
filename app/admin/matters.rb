@@ -1,4 +1,6 @@
 ActiveAdmin.register Matter do
+
+ permit_params :matter_type, :matter_name, :matter_number, :user_id, :state, :county
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
