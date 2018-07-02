@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  # Routes for the Beneficiary resource:
+  # CREATE
+  get "/beneficiaries/new", :controller => "beneficiaries", :action => "new"
+  post "/create_beneficiary", :controller => "beneficiaries", :action => "create"
+
+  # READ
+  get "/beneficiaries", :controller => "beneficiaries", :action => "index"
+  get "/beneficiaries/:id", :controller => "beneficiaries", :action => "show"
+
+  # UPDATE
+  get "/beneficiaries/:id/edit", :controller => "beneficiaries", :action => "edit"
+  post "/update_beneficiary/:id", :controller => "beneficiaries", :action => "update"
+
+  # DELETE
+  get "/delete_beneficiary/:id", :controller => "beneficiaries", :action => "destroy"
+  #------------------------------
+
   # Routes for the Fiduciary resource:
   # CREATE
   get "/fiduciaries/new", :controller => "fiduciaries", :action => "new"
