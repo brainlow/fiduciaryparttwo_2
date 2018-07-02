@@ -1,0 +1,100 @@
+<!-- Validation failure messages -->
+<% if @asset.errors.any? %>
+  <% @asset.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Asset</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_asset" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for matter_id -->
+      <div class="form-group">
+        <label for="matter_id" class="control-label">
+          Matter
+        </label>
+
+        <input type="text" id="matter_id" name="matter_id" placeholder="Matter" class="form-control" value="<%= @asset.matter_id %>">
+      </div>
+
+      <!-- Label and input for beg_value -->
+      <div class="form-group">
+        <label for="beg_value" class="control-label">
+          Beg value
+        </label>
+
+        <input type="text" id="beg_value" name="beg_value" placeholder="Beg value" class="form-control" value="<%= @asset.beg_value %>">
+      </div>
+
+      <!-- Label and input for end_value -->
+      <div class="form-group">
+        <label for="end_value" class="control-label">
+          End value
+        </label>
+
+        <input type="text" id="end_value" name="end_value" placeholder="End value" class="form-control" value="<%= @asset.end_value %>">
+      </div>
+
+      <!-- Label and input for description -->
+      <div class="form-group">
+        <label for="description" class="control-label">
+          Description
+        </label>
+
+        <input type="text" id="description" name="description" placeholder="Description" class="form-control" value="<%= @asset.description %>">
+      </div>
+
+      <!-- Label and input for beg_shares -->
+      <div class="form-group">
+        <label for="beg_shares" class="control-label">
+          Beg shares
+        </label>
+
+        <input type="text" id="beg_shares" name="beg_shares" placeholder="Beg shares" class="form-control" value="<%= @asset.beg_shares %>">
+      </div>
+
+      <!-- Label and input for end_shares -->
+      <div class="form-group">
+        <label for="end_shares" class="control-label">
+          End shares
+        </label>
+
+        <input type="text" id="end_shares" name="end_shares" placeholder="End shares" class="form-control" value="<%= @asset.end_shares %>">
+      </div>
+
+      <!-- Label and input for beg_date -->
+      <div class="form-group">
+        <label for="beg_date" class="control-label">
+          Beg date
+        </label>
+
+        <input type="text" id="beg_date" name="beg_date" placeholder="Beg date" class="form-control" value="<%= @asset.beg_date %>">
+      </div>
+
+      <!-- Label and input for asset_type -->
+      <div class="form-group">
+        <label for="asset_type" class="control-label">
+          Asset type
+        </label>
+
+        <input type="text" id="asset_type" name="asset_type" placeholder="Asset type" class="form-control" value="<%= @asset.asset_type %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Asset
+      </button>
+      or
+      <a href="/assets">Cancel</a>
+    </form>
+  </div>
+</div>

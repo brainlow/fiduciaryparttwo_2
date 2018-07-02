@@ -1,0 +1,42 @@
+<div class="page-header">
+  <h1>
+    Assets
+    <a href="/assets/new" class="btn btn-lg btn-success">New Asset</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Matter</th>
+        <th>Beg value</th>
+        <th>End value</th>
+        <th>Description</th>
+        <th>Beg shares</th>
+        <th>End shares</th>
+        <th>Beg date</th>
+        <th>Asset type</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @assets.each do |asset| %>
+      <tr>
+        <td><%= asset.matter_id %></td>
+        <td><%= asset.beg_value %></td>
+        <td><%= asset.end_value %></td>
+        <td><%= asset.description %></td>
+        <td><%= asset.beg_shares %></td>
+        <td><%= asset.end_shares %></td>
+        <td><%= asset.beg_date %></td>
+        <td><%= asset.asset_type %></td>
+        <td>
+          <a href="/assets/<%= asset.id %>" class="btn btn-primary">Show</a>
+          <a href="/assets/<%= asset.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_asset/<%= asset.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
