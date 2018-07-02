@@ -23,7 +23,13 @@
         <td><%= matter.matter_type %></td>
         <td><%= matter.matter_name %></td>
         <td><%= matter.matter_number %></td>
-        <td><%= matter.user.email %></td>
+        <td>
+          <% if matter.user.present? %>
+            <a href="/users/<%= matter.user.id %>">
+              <%= matter.user.email %>
+            </a>
+          <% end %>
+        </td>
         <td><%= matter.state %></td>
         <td><%= matter.county %></td>
         <td>

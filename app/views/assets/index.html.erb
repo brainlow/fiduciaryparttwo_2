@@ -22,7 +22,13 @@
 
       <% @assets.each do |asset| %>
       <tr>
-        <td><%= asset.matter.matter_type %></td>
+        <td>
+          <% if asset.matter.present? %>
+            <a href="/matters/<%= asset.matter.id %>">
+              <%= asset.matter.matter_type %>
+            </a>
+          <% end %>
+        </td>
         <td><%= asset.beg_value %></td>
         <td><%= asset.end_value %></td>
         <td><%= asset.description %></td>

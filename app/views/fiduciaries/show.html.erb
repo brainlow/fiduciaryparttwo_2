@@ -19,7 +19,13 @@
       </dd>
 
       <dt>Matter</dt>
-      <dd><%= @fiduciary.matter_id %></dd>
+      <dd>
+        <% if @fiduciary.matter.present? %>
+          <a href="/matters/<%= @fiduciary.matter_id %>">
+            <%= @fiduciary.matter.matter_type %>
+          </a>
+        <% end %>
+      </dd>
 
     </dl>
 

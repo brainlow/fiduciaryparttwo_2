@@ -19,7 +19,13 @@
       </dd>
 
       <dt>Matter</dt>
-      <dd><%= @beneficiary.matter_id %></dd>
+      <dd>
+        <% if @beneficiary.matter.present? %>
+          <a href="/matters/<%= @beneficiary.matter_id %>">
+            <%= @beneficiary.matter.matter_type %>
+          </a>
+        <% end %>
+      </dd>
 
     </dl>
 

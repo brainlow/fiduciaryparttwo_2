@@ -15,7 +15,13 @@
       <dd><%= @matter.matter_number %></dd>
 
       <dt>User</dt>
-      <dd><%= @matter.user_id %></dd>
+      <dd>
+        <% if @matter.user.present? %>
+          <a href="/users/<%= @matter.user_id %>">
+            <%= @matter.user.email %>
+          </a>
+        <% end %>
+      </dd>
 
       <dt>State</dt>
       <dd><%= @matter.state %></dd>
