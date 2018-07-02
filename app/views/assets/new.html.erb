@@ -24,7 +24,7 @@
           Matter
         </label>
 
-        <input type="text" id="matter_id" name="matter_id" placeholder="Matter" class="form-control" value="<%= @asset.matter_id %>">
+        <%= select_tag(:matter_id, options_from_collection_for_select(Matter.all, :id, :matter_type, @asset.matter_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for beg_value -->
