@@ -1,6 +1,9 @@
 class Matter < ApplicationRecord
   # Direct associations
 
+  has_many   :fiduciaries,
+             :dependent => :destroy
+
   has_many   :assets,
              :dependent => :destroy
 
