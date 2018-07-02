@@ -38,3 +38,96 @@
     </div>
   </div>
 </div>
+
+<!-- A Matter has many assets -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Assets
+      </li>
+
+      <% @matter.assets.each do |asset| %>
+        <li class="list-group-item">
+          <a href="/assets/<%= asset.id %>">
+            <%= asset.matter_id %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/assets/<%= asset.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/assets/<%= asset.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_asset/<%= asset.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A Matter has many fiduciaries -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Fiduciaries
+      </li>
+
+      <% @matter.fiduciaries.each do |fiduciary| %>
+        <li class="list-group-item">
+          <a href="/fiduciaries/<%= fiduciary.id %>">
+            <%= fiduciary.first_name %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/fiduciaries/<%= fiduciary.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/fiduciaries/<%= fiduciary.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_fiduciary/<%= fiduciary.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A Matter has many beneficiaries -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Beneficiaries
+      </li>
+
+      <% @matter.beneficiaries.each do |beneficiary| %>
+        <li class="list-group-item">
+          <a href="/beneficiaries/<%= beneficiary.id %>">
+            <%= beneficiary.first_name %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/beneficiaries/<%= beneficiary.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/beneficiaries/<%= beneficiary.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_beneficiary/<%= beneficiary.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
