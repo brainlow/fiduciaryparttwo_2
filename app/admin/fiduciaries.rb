@@ -1,4 +1,6 @@
 ActiveAdmin.register Fiduciary do
+
+ permit_params :first_name, :last_name, :address, :matter_id
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
