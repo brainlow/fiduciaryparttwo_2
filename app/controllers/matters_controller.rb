@@ -16,6 +16,9 @@ class MattersController < ApplicationController
   end
 
   def show
+    @beneficiary = Beneficiary.new
+    @fiduciary = Fiduciary.new
+    @asset = Asset.new
     @matter = Matter.find(params[:id])
 
     render("matters/show.html.erb")
