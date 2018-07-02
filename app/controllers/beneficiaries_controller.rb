@@ -1,6 +1,6 @@
 class BeneficiariesController < ApplicationController
   def index
-    @beneficiaries = Beneficiary.all
+    @beneficiaries = Beneficiary.page(params[:page]).per(10)
     @location_hash = Gmaps4rails.build_markers(@beneficiaries.where.not(:address_latitude => nil)) do |beneficiary, marker|
       marker.lat beneficiary.address_latitude
       marker.lng beneficiary.address_longitude

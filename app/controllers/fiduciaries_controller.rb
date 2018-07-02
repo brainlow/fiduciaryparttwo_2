@@ -1,6 +1,6 @@
 class FiduciariesController < ApplicationController
   def index
-    @fiduciaries = Fiduciary.all
+    @fiduciaries = Fiduciary.page(params[:page]).per(10)
     @location_hash = Gmaps4rails.build_markers(@fiduciaries.where.not(:address_latitude => nil)) do |fiduciary, marker|
       marker.lat fiduciary.address_latitude
       marker.lng fiduciary.address_longitude

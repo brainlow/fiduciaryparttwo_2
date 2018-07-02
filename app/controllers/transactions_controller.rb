@@ -1,6 +1,6 @@
 class TransactionsController < ApplicationController
   def index
-    @transactions = Transaction.all
+    @transactions = Transaction.page(params[:page]).per(10)
 
     render("transactions/index.html.erb")
   end
