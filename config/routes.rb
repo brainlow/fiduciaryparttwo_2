@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root :to => "matters#index"
   # Routes for the Transaction resource:
   # CREATE
   get "/transactions/new", :controller => "transactions", :action => "new"
