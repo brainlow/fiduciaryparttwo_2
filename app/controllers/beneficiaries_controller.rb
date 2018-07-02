@@ -1,6 +1,11 @@
 class BeneficiariesController < ApplicationController
   def index
     @beneficiaries = Beneficiary.all
+    @location_hash = Gmaps4rails.build_markers(@beneficiaries.where.not(:address_latitude => nil)) do |beneficiary, marker|
+      marker.lat beneficiary.address_latitude
+      marker.lng beneficiary.address_longitude
+      marker.infowindow "<h5><a href='/beneficiaries/#{beneficiary.id}'>#{beneficiary.first_name}</a></h5><small>#{beneficiary.address_formatted_address}</small>"
+    end
 
     render("beneficiaries/index.html.erb")
   end
