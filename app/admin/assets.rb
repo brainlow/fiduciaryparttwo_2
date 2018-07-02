@@ -1,4 +1,6 @@
 ActiveAdmin.register Asset do
+
+ permit_params :matter_id, :beg_value, :end_value, :description, :beg_shares, :end_shares, :beg_date, :asset_type
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
