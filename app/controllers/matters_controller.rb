@@ -1,24 +1,12 @@
 class MattersController < ApplicationController
-  before_action :current_user_must_be_matter_user, :only => [:show, :edit, :update, :destroy]
-
-  def current_user_must_be_matter_user
-    matter = Matter.find(params[:id])
-
-    unless current_user == matter.user
-      redirect_to :back, :alert => "You are not authorized for that."
-    end
-  end
-
   def index
-    @q = current_user.matters.ransack(params[:q])
-    @matters = @q.result(:distinct => true).includes(:user, :assets, :fiduciaries, :beneficiaries).page(params[:page]).per(10)
+    @q = Matter.ransack(params[:q])
+    @matters = @q.result(:distinct => true).includes(:assets, :relationship, :transactions).page(params[:page]).per(10)
 
     render("matters/index.html.erb")
   end
 
   def show
-    @beneficiary = Beneficiary.new
-    @fiduciary = Fiduciary.new
     @asset = Asset.new
     @matter = Matter.find(params[:id])
 
@@ -37,9 +25,8 @@ class MattersController < ApplicationController
     @matter.matter_type = params[:matter_type]
     @matter.matter_name = params[:matter_name]
     @matter.matter_number = params[:matter_number]
-    @matter.user_id = params[:user_id]
-    @matter.state = params[:state]
-    @matter.county = params[:county]
+    @matter.matter_state = params[:matter_state]
+    @matter.matter_county = params[:matter_county]
 
     save_status = @matter.save
 
@@ -69,9 +56,8 @@ class MattersController < ApplicationController
     @matter.matter_type = params[:matter_type]
     @matter.matter_name = params[:matter_name]
     @matter.matter_number = params[:matter_number]
-    @matter.user_id = params[:user_id]
-    @matter.state = params[:state]
-    @matter.county = params[:county]
+    @matter.matter_state = params[:matter_state]
+    @matter.matter_county = params[:matter_county]
 
     save_status = @matter.save
 

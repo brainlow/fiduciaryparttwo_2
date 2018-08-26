@@ -1,5 +1,5 @@
 require 'open-uri'
-class Beneficiary < ApplicationRecord
+class Organization < ApplicationRecord
   before_validation :geocode_address
 
   def geocode_address
@@ -19,9 +19,14 @@ class Beneficiary < ApplicationRecord
       end
     end
   end
+  mount_uploader :logo, LogoUploader
+
   # Direct associations
 
-  belongs_to :matter
+  has_many   :relationships,
+             :dependent => :nullify
+
+  belongs_to :user
 
   # Indirect associations
 

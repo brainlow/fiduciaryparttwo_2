@@ -1,19 +1,17 @@
 class Matter < ApplicationRecord
   # Direct associations
 
-  has_many   :beneficiaries,
-             :dependent => :destroy
-
-  has_many   :fiduciaries,
+  has_one    :relationship,
              :dependent => :destroy
 
   has_many   :assets,
              :dependent => :destroy
 
-  belongs_to :user,
-             :counter_cache => true
-
   # Indirect associations
+
+  has_many   :transactions,
+             :through => :assets,
+             :source => :transactions
 
   # Validations
 

@@ -1,12 +1,13 @@
 class AssetsController < ApplicationController
   def index
     @q = Asset.ransack(params[:q])
-    @assets = @q.result(:distinct => true).includes(:matter).page(params[:page]).per(10)
+    @assets = @q.result(:distinct => true).includes(:matter, :transactions).page(params[:page]).per(10)
 
     render("assets/index.html.erb")
   end
 
   def show
+    @transaction = Transaction.new
     @asset = Asset.find(params[:id])
 
     render("assets/show.html.erb")
@@ -22,13 +23,15 @@ class AssetsController < ApplicationController
     @asset = Asset.new
 
     @asset.matter_id = params[:matter_id]
-    @asset.beg_value = params[:beg_value]
-    @asset.end_value = params[:end_value]
+    @asset.amount = params[:amount]
     @asset.description = params[:description]
-    @asset.beg_shares = params[:beg_shares]
-    @asset.end_shares = params[:end_shares]
-    @asset.beg_date = params[:beg_date]
+    @asset.shares = params[:shares]
+    @asset.acq_date = params[:acq_date]
     @asset.asset_type = params[:asset_type]
+    @asset.ticker = params[:ticker]
+    @asset.account_number = params[:account_number]
+    @asset.institution = params[:institution]
+    @asset.account_type = params[:account_type]
 
     save_status = @asset.save
 
@@ -56,13 +59,15 @@ class AssetsController < ApplicationController
     @asset = Asset.find(params[:id])
 
     @asset.matter_id = params[:matter_id]
-    @asset.beg_value = params[:beg_value]
-    @asset.end_value = params[:end_value]
+    @asset.amount = params[:amount]
     @asset.description = params[:description]
-    @asset.beg_shares = params[:beg_shares]
-    @asset.end_shares = params[:end_shares]
-    @asset.beg_date = params[:beg_date]
+    @asset.shares = params[:shares]
+    @asset.acq_date = params[:acq_date]
     @asset.asset_type = params[:asset_type]
+    @asset.ticker = params[:ticker]
+    @asset.account_number = params[:account_number]
+    @asset.institution = params[:institution]
+    @asset.account_type = params[:account_type]
 
     save_status = @asset.save
 

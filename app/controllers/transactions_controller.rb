@@ -1,7 +1,7 @@
 class TransactionsController < ApplicationController
   def index
     @q = Transaction.ransack(params[:q])
-    @transactions = @q.result(:distinct => true).page(params[:page]).per(10)
+    @transactions = @q.result(:distinct => true).includes(:asset, :matter).page(params[:page]).per(10)
 
     render("transactions/index.html.erb")
   end

@@ -41,9 +41,9 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
+          <li><a href="/relationships">Relationships</a></li>
+          <li><a href="/organizations">Organizations</a></li>
           <li><a href="/transactions">Transactions</a></li>
-          <li><a href="/beneficiaries">Beneficiaries</a></li>
-          <li><a href="/fiduciaries">Fiduciaries</a></li>
           <li><a href="/assets">Assets</a></li>
           <li><a href="/matters">Matters</a></li>
           <li><a href="/users">Users</a></li>
@@ -54,7 +54,7 @@
           <% if current_user.present? %>
             <li>
               <a href="/users/edit">
-                <%= current_user.email %>
+                <%= current_user.created_at %>
               </a>
             </li>
 

@@ -4,9 +4,8 @@ class CreateMatters < ActiveRecord::Migration
       t.string :matter_type
       t.string :matter_name
       t.string :matter_number
-      t.integer :user_id
-      t.string :state
-      t.string :county
+      t.string :matter_state
+      t.string :matter_county
 
       t.timestamps
 

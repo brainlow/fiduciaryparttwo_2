@@ -1,6 +1,6 @@
-ActiveAdmin.register Beneficiary do
+ActiveAdmin.register Organization do
 
- permit_params :first_name, :last_name, :address, :matter_id
+ permit_params :name, :address, :url, :user_id, :role, :logo
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #

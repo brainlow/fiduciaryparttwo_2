@@ -24,7 +24,7 @@
           Asset
         </label>
 
-        <input type="text" id="asset_id" name="asset_id" placeholder="Asset" class="form-control" value="<%= @transaction.asset_id %>">
+        <%= select_tag(:asset_id, options_from_collection_for_select(Asset.all, :id, :matter_id, @transaction.asset_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for shares -->

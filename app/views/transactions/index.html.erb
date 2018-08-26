@@ -9,18 +9,6 @@
       <p class="lead">Narrow results:</p>
 
         <div class="form-group">
-  <%= f.label :asset_id, "Asset" %>
-  <div class="row">
-    <div class='col-md-6 mb-1'>
-      <%= f.text_field :asset_id_gteq, :class => "form-control", :placeholder => "Asset greater than or equal to" %>
-    </div>
-    <div class='col-md-6'>
-      <%= f.text_field :asset_id_lteq, :class => "form-control", :placeholder => "Asset less than or equal to" %>
-    </div>
-  </div>
-</div>
-
-<div class="form-group">
     <%= f.label :distribution_eq, "Distribution" %>
     <div>
       <label class="radio-inline">
@@ -154,7 +142,10 @@
           });
       </script>
 
-        
+        <div class="form-group">
+      <%= f.label :matter_matter_type_cont, "Matter matter_type contains" %>
+      <%= f.text_field :matter_matter_type_cont, :class => "form-control", :placeholder => "Matter matter_type contains" %>
+    </div>
 
       <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
 
@@ -183,7 +174,13 @@
 
       <% @transactions.each do |transaction| %>
       <tr>
-        <td><%= transaction.asset_id %></td>
+        <td>
+          <% if transaction.asset.present? %>
+            <a href="/assets/<%= transaction.asset.id %>">
+              <%= transaction.asset.matter_id %>
+            </a>
+          <% end %>
+        </td>
         <td><%= transaction.shares %></td>
         <td><%= transaction.date %></td>
         <td><%= transaction.amount %></td>

@@ -14,13 +14,13 @@
   </div>
 
 <div class="form-group">
-    <%= f.label :county_cont, "County contains" %>
-    <%= f.text_field :county_cont, :class => "form-control", :placeholder => "County contains" %>
+    <%= f.label :matter_county_cont, "Matter county contains" %>
+    <%= f.text_field :matter_county_cont, :class => "form-control", :placeholder => "Matter county contains" %>
   </div>
 
 <div class="form-group">
-    <%= f.label :state_cont, "State contains" %>
-    <%= f.text_field :state_cont, :class => "form-control", :placeholder => "State contains" %>
+    <%= f.label :matter_state_cont, "Matter state contains" %>
+    <%= f.text_field :matter_state_cont, :class => "form-control", :placeholder => "Matter state contains" %>
   </div>
 
 <div class="form-group">
@@ -73,20 +73,7 @@
           });
       </script>
 
-        <div class="form-group">
-      <%= f.label :user_email_cont, "User email contains" %>
-      <%= f.text_field :user_email_cont, :class => "form-control", :placeholder => "User email contains" %>
-    </div>
-
-<div class="form-group">
-      <%= f.label :fiduciaries_first_name_cont, "Fiduciary first_name contains" %>
-      <%= f.text_field :fiduciaries_first_name_cont, :class => "form-control", :placeholder => "Fiduciary first_name contains" %>
-    </div>
-
-<div class="form-group">
-      <%= f.label :beneficiaries_first_name_cont, "Beneficiary first_name contains" %>
-      <%= f.text_field :beneficiaries_first_name_cont, :class => "form-control", :placeholder => "Beneficiary first_name contains" %>
-    </div>
+        
 
       <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
 
@@ -105,9 +92,8 @@
         <th>Matter type</th>
         <th>Matter name</th>
         <th>Matter number</th>
-        <th>User</th>
-        <th>State</th>
-        <th>County</th>
+        <th>Matter state</th>
+        <th>Matter county</th>
         <th>Actions</th>
       </tr>
 
@@ -116,22 +102,12 @@
         <td><%= matter.matter_type %></td>
         <td><%= matter.matter_name %></td>
         <td><%= matter.matter_number %></td>
-        <td>
-          <% if matter.user.present? %>
-            <a href="/users/<%= matter.user.id %>">
-              <%= matter.user.email %>
-            </a>
-          <% end %>
-        </td>
-        <td><%= matter.state %></td>
-        <td><%= matter.county %></td>
+        <td><%= matter.matter_state %></td>
+        <td><%= matter.matter_county %></td>
         <td>
           <a href="/matters/<%= matter.id %>" class="btn btn-primary">Show</a>
-          
-          <% if current_user == matter.user %>
-            <a href="/matters/<%= matter.id %>/edit" class="btn btn-warning">Edit</a>
-            <a href="/delete_matter/<%= matter.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-          <% end %>
+          <a href="/matters/<%= matter.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_matter/<%= matter.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
         </td>
       </tr>
       <% end %>

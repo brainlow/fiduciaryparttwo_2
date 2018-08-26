@@ -1,0 +1,76 @@
+<!-- Validation failure messages -->
+<% if @organization.errors.any? %>
+  <% @organization.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Organization</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_organization" method="post" enctype="multipart/form-data">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @organization.name %>">
+      </div>
+
+      <!-- Label and input for address -->
+      <div class="form-group">
+        <label for="address" class="control-label">
+          Address
+        </label>
+
+        <input type="text" id="address" name="address" placeholder="Address" class="form-control" value="<%= @organization.address %>">
+      </div>
+
+      <!-- Label and input for url -->
+      <div class="form-group">
+        <label for="url" class="control-label">
+          Url
+        </label>
+
+        <input type="text" id="url" name="url" placeholder="Url" class="form-control" value="<%= @organization.url %>">
+      </div>
+
+      <!-- Label and input for user_id -->
+      <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+      <!-- Label and input for role -->
+      <div class="form-group">
+        <label for="role" class="control-label">
+          Role
+        </label>
+
+        <input type="text" id="role" name="role" placeholder="Role" class="form-control" value="<%= @organization.role %>">
+      </div>
+
+      <!-- Label and input for logo -->
+      <div class="form-group">
+        <label for="logo" class="control-label">
+          Logo
+        </label>
+
+        <input type="file" id="logo" name="logo" class="form-control">
+      </div>
+
+      <button class="btn btn-success">
+        Create Organization
+      </button>
+      or
+      <a href="/organizations">Cancel</a>
+    </form>
+  </div>
+</div>
