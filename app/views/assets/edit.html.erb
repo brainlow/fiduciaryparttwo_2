@@ -27,22 +27,13 @@
         <%= select_tag(:matter_id, options_from_collection_for_select(Matter.all, :id, :matter_type, @asset.matter_id), :class => "form-control") %>
       </div>
 
-      <!-- Label and input for beg_value -->
+      <!-- Label and input for amount -->
       <div class="form-group">
-        <label for="beg_value" class="control-label">
-          Beg value
+        <label for="amount" class="control-label">
+          Amount
         </label>
 
-        <input type="text" id="beg_value" name="beg_value" placeholder="Beg value" class="form-control" value="<%= @asset.beg_value %>">
-      </div>
-
-      <!-- Label and input for end_value -->
-      <div class="form-group">
-        <label for="end_value" class="control-label">
-          End value
-        </label>
-
-        <input type="text" id="end_value" name="end_value" placeholder="End value" class="form-control" value="<%= @asset.end_value %>">
+        <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control" value="<%= @asset.amount %>">
       </div>
 
       <!-- Label and input for description -->
@@ -54,31 +45,22 @@
         <input type="text" id="description" name="description" placeholder="Description" class="form-control" value="<%= @asset.description %>">
       </div>
 
-      <!-- Label and input for beg_shares -->
+      <!-- Label and input for shares -->
       <div class="form-group">
-        <label for="beg_shares" class="control-label">
-          Beg shares
+        <label for="shares" class="control-label">
+          Shares
         </label>
 
-        <input type="text" id="beg_shares" name="beg_shares" placeholder="Beg shares" class="form-control" value="<%= @asset.beg_shares %>">
+        <input type="text" id="shares" name="shares" placeholder="Shares" class="form-control" value="<%= @asset.shares %>">
       </div>
 
-      <!-- Label and input for end_shares -->
+      <!-- Label and input for acq_date -->
       <div class="form-group">
-        <label for="end_shares" class="control-label">
-          End shares
+        <label for="acq_date" class="control-label">
+          Acq date
         </label>
 
-        <input type="text" id="end_shares" name="end_shares" placeholder="End shares" class="form-control" value="<%= @asset.end_shares %>">
-      </div>
-
-      <!-- Label and input for beg_date -->
-      <div class="form-group">
-        <label for="beg_date" class="control-label">
-          Beg date
-        </label>
-
-        <input type="text" id="beg_date" name="beg_date" placeholder="Beg date" class="form-control" value="<%= @asset.beg_date %>">
+        <input type="text" id="acq_date" name="acq_date" placeholder="Acq date" class="form-control" value="<%= @asset.acq_date %>">
       </div>
 
       <!-- Label and input for asset_type -->
@@ -88,6 +70,42 @@
         </label>
 
         <input type="text" id="asset_type" name="asset_type" placeholder="Asset type" class="form-control" value="<%= @asset.asset_type %>">
+      </div>
+
+      <!-- Label and input for ticker -->
+      <div class="form-group">
+        <label for="ticker" class="control-label">
+          Ticker
+        </label>
+
+        <input type="text" id="ticker" name="ticker" placeholder="Ticker" class="form-control" value="<%= @asset.ticker %>">
+      </div>
+
+      <!-- Label and input for account_number -->
+      <div class="form-group">
+        <label for="account_number" class="control-label">
+          Account number
+        </label>
+
+        <input type="text" id="account_number" name="account_number" placeholder="Account number" class="form-control" value="<%= @asset.account_number %>">
+      </div>
+
+      <!-- Label and input for institution -->
+      <div class="form-group">
+        <label for="institution" class="control-label">
+          Institution
+        </label>
+
+        <input type="text" id="institution" name="institution" placeholder="Institution" class="form-control" value="<%= @asset.institution %>">
+      </div>
+
+      <!-- Label and input for account_type -->
+      <div class="form-group">
+        <label for="account_type" class="control-label">
+          Account type
+        </label>
+
+        <input type="text" id="account_type" name="account_type" placeholder="Account type" class="form-control" value="<%= @asset.account_type %>">
       </div>
 
       <button class="btn btn-warning">

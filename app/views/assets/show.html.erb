@@ -14,26 +14,32 @@
         <% end %>
       </dd>
 
-      <dt>Beg value</dt>
-      <dd><%= @asset.beg_value %></dd>
-
-      <dt>End value</dt>
-      <dd><%= @asset.end_value %></dd>
+      <dt>Amount</dt>
+      <dd><%= @asset.amount %></dd>
 
       <dt>Description</dt>
       <dd><%= @asset.description %></dd>
 
-      <dt>Beg shares</dt>
-      <dd><%= @asset.beg_shares %></dd>
+      <dt>Shares</dt>
+      <dd><%= @asset.shares %></dd>
 
-      <dt>End shares</dt>
-      <dd><%= @asset.end_shares %></dd>
-
-      <dt>Beg date</dt>
-      <dd><%= @asset.beg_date %></dd>
+      <dt>Acq date</dt>
+      <dd><%= @asset.acq_date %></dd>
 
       <dt>Asset type</dt>
       <dd><%= @asset.asset_type %></dd>
+
+      <dt>Ticker</dt>
+      <dd><%= @asset.ticker %></dd>
+
+      <dt>Account number</dt>
+      <dd><%= @asset.account_number %></dd>
+
+      <dt>Institution</dt>
+      <dd><%= @asset.institution %></dd>
+
+      <dt>Account type</dt>
+      <dd><%= @asset.account_type %></dd>
 
     </dl>
 
@@ -48,5 +54,112 @@
         Delete
       </a>
     </div>
+  </div>
+</div>
+
+<!-- A Asset has many transactions -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Transactions
+      </li>
+
+      <% @asset.transactions.each do |transaction| %>
+        <li class="list-group-item">
+          <a href="/transactions/<%= transaction.id %>">
+            <%= transaction.asset_id %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/transactions/<%= transaction.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/transactions/<%= transaction.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_transaction/<%= transaction.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_transaction" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for asset_id -->
+      <input type="hidden" name="asset_id" value="<%= @asset.id %>">
+
+      <!-- Label and input for shares -->
+      <div class="form-group">
+        <label for="shares" class="control-label">
+          Shares
+        </label>
+
+        <input type="text" id="shares" name="shares" placeholder="Shares" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for date -->
+      <div class="form-group">
+        <label for="date" class="control-label">
+          Date
+        </label>
+
+        <input type="text" id="date" name="date" placeholder="Date" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for amount -->
+      <div class="form-group">
+        <label for="amount" class="control-label">
+          Amount
+        </label>
+
+        <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for category -->
+      <div class="form-group">
+        <label for="category" class="control-label">
+          Category
+        </label>
+
+        <textarea id="category" name="category" placeholder="Category" class="form-control" rows="3"></textarea>
+      </div>
+
+      <!-- Label and input for description -->
+      <div class="form-group">
+        <label for="description" class="control-label">
+          Description
+        </label>
+
+        <textarea id="description" name="description" placeholder="Description" class="form-control" rows="3"></textarea>
+      </div>
+
+      <!-- Label and input for payee -->
+      <div class="form-group">
+        <label for="payee" class="control-label">
+          Payee
+        </label>
+
+        <textarea id="payee" name="payee" placeholder="Payee" class="form-control" rows="3"></textarea>
+      </div>
+
+      <!-- Label and input for distribution -->
+      <div class="checkbox">
+        <label for="distribution">
+          <input type="checkbox" id="distribution" name="distribution" value="1" <%= "checked" if @transaction.distribution %>>
+          Distribution
+        </label>
+      </div>
+
+      <button class="btn btn-block btn-success">
+        Create Transaction
+      </button>
+    </form>
+      </li>
+    </ul>
   </div>
 </div>

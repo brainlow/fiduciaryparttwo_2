@@ -5,12 +5,6 @@
 <div class="row">
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
-      <dt>Email</dt>
-      <dd><%= @user.email %></dd>
-
-      <dt>Password</dt>
-      <dd><%= @user.password %></dd>
-
       <dt>First name</dt>
       <dd><%= @user.first_name %></dd>
 
@@ -24,11 +18,17 @@
         </div>
       </dd>
 
-      <dt>Corporate</dt>
-      <dd><%= @user.corporate %></dd>
+      <dt>Isadmin</dt>
+      <dd><%= @user.isadmin %></dd>
 
-      <dt>Firm name</dt>
-      <dd><%= @user.firm_name %></dd>
+      <dt>Email</dt>
+      <dd><%= @user.email %></dd>
+
+      <dt>Password</dt>
+      <dd><%= @user.password %></dd>
+
+      <dt>Profile pic</dt>
+      <dd><img src="<%= @user.profile_pic %>" class="img-responsive"></dd>
 
     </dl>
 
@@ -40,29 +40,29 @@
   </div>
 </div>
 
-<!-- A User has many matters -->
+<!-- A User has many relationships -->
 
 <div class="row">
   <div class="col-md-12">
     <ul class="list-group">
       <li class="list-group-item list-group-item-info">
-        Matters
+        Relationships
       </li>
 
-      <% @user.matters.each do |matter| %>
+      <% @user.relationships.each do |relationship| %>
         <li class="list-group-item">
-          <a href="/matters/<%= matter.id %>">
-            <%= matter.matter_type %>
+          <a href="/relationships/<%= relationship.id %>">
+            <%= relationship.id %>
           </a>
           <div class="btn-group btn-group-xs pull-right">
-            <a href="/matters/<%= matter.id %>" class="btn btn-primary">
+            <a href="/relationships/<%= relationship.id %>" class="btn btn-primary">
               <i class="fa fa-search-plus"></i>
             </a>
-            <%if current_user == matter.user %>
-              <a href="/matters/<%= matter.id %>/edit" class="btn btn-warning">
+            <%if current_user == relationship.user %>
+              <a href="/relationships/<%= relationship.id %>/edit" class="btn btn-warning">
                 <i class="fa fa-edit"></i>
               </a>
-              <a href="/delete_matter/<%= matter.id %>" class="btn btn-danger" rel="nofollow">
+              <a href="/delete_relationship/<%= relationship.id %>" class="btn btn-danger" rel="nofollow">
                 <i class="fa fa-trash-o"></i>
               </a>
             <% end %>

@@ -1,0 +1,58 @@
+<!-- Validation failure messages -->
+<% if @relationship.errors.any? %>
+  <% @relationship.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Edit Relationship #<%= @relationship.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_relationship/<%= @relationship.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      
+      
+
+      <!-- Label and input for role -->
+      <div class="form-group">
+        <label for="role" class="control-label">
+          Role
+        </label>
+
+        <input type="text" id="role" name="role" placeholder="Role" class="form-control" value="<%= @relationship.role %>">
+      </div>
+
+      <!-- Label and input for matter_id -->
+      <div class="form-group">
+        <label for="matter_id" class="control-label">
+          Matter
+        </label>
+
+        <%= select_tag(:matter_id, options_from_collection_for_select(Matter.all, :id, :matter_type, @relationship.matter_id), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for organization_id -->
+      <div class="form-group">
+        <label for="organization_id" class="control-label">
+          Organization
+        </label>
+
+        <%= select_tag(:organization_id, options_from_collection_for_select(Organization.all, :id, :name, @relationship.organization_id), :class => "form-control") %>
+      </div>
+
+      <button class="btn btn-warning">
+        Update Relationship
+      </button>
+      or
+      <a href="/relationships/<%= @relationship.id %>">Cancel</a>
+    </form>
+  </div>
+</div>
