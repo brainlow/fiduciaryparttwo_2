@@ -1,0 +1,141 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h1>
+      All transactions
+    </h1>
+
+    <a href="/transactions/new" class="btn btn-block btn-outline-secondary">
+      Add a new transaction
+    </a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-3">
+    <%= render partial: "transaction_templates/transactions_search_form" %>
+  </div>
+</div>
+
+
+
+<hr>
+
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Asset
+        </th>
+
+        <th>
+          Shares
+        </th>
+
+        <th>
+          Date
+        </th>
+
+        <th>
+          Amount
+        </th>
+
+        <th>
+          Category
+        </th>
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Payee
+        </th>
+
+        <th>
+          Distribution
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @transactions.each do |transaction| %>
+      <tr>
+        <td>
+          <%= transaction.id %>
+        </td>
+
+        <td>
+          <% if transaction.asset.present? %>
+            <a href="/assets/<%= transaction.asset.id %>">
+              <%= transaction.asset.matter_id %>
+            </a>
+          <% end %>
+        </td>
+
+        <td>
+          <%= transaction.shares %>
+        </td>
+
+        <td>
+          <%= transaction.date %>
+        </td>
+
+        <td>
+          <%= transaction.amount %>
+        </td>
+
+        <td>
+          <%= transaction.category %>
+        </td>
+
+        <td>
+          <%= transaction.description %>
+        </td>
+
+        <td>
+          <%= transaction.payee %>
+        </td>
+
+        <td>
+          <%= transaction.distribution %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(transaction.created_at) %> ago
+        </td>
+
+        <td>
+          <%= time_ago_in_words(transaction.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/transactions/<%= transaction.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <%= paginate @transactions, theme: "twitter-bootstrap-4" %>
+      </div>
+    </div>
+
+  </div>
+</div>

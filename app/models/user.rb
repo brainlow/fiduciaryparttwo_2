@@ -19,17 +19,31 @@ class User < ApplicationRecord
       end
     end
   end
+  mount_uploader :profile_pic, ProfilePicUploader
+
   # Direct associations
 
-  has_many   :matters,
+  has_many   :employees,
+             :class_name => "Occupation",
+             :dependent => :destroy
+
+  has_many   :assignments,
              :dependent => :destroy
 
   # Indirect associations
 
+  has_many   :matters,
+             :through => :assignments,
+             :source => :matter
+
+  has_many   :organizations,
+             :through => :employees,
+             :source => :organization
+
   # Validations
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :validatable
 end

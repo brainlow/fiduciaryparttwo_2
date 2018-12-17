@@ -1,94 +1,104 @@
 class AssetsController < ApplicationController
   def index
     @q = Asset.ransack(params[:q])
-    @assets = @q.result(:distinct => true).includes(:matter).page(params[:page]).per(10)
+    @assets = @q.result(:distinct => true).includes(:matter, :transactions, :asset_values).page(params[:page]).per(10)
 
-    render("assets/index.html.erb")
+    render("asset_templates/index.html.erb")
   end
 
   def show
-    @asset = Asset.find(params[:id])
+    @asset_value = AssetValue.new
+    @transaction = Transaction.new
+    @asset = Asset.find(params.fetch("id_to_display"))
 
-    render("assets/show.html.erb")
+    render("asset_templates/show.html.erb")
   end
 
-  def new
+  def new_form
     @asset = Asset.new
 
-    render("assets/new.html.erb")
+    render("asset_templates/new_form.html.erb")
   end
 
-  def create
+  def create_row
     @asset = Asset.new
 
-    @asset.matter_id = params[:matter_id]
-    @asset.beg_value = params[:beg_value]
-    @asset.end_value = params[:end_value]
-    @asset.description = params[:description]
-    @asset.beg_shares = params[:beg_shares]
-    @asset.end_shares = params[:end_shares]
-    @asset.beg_date = params[:beg_date]
-    @asset.asset_type = params[:asset_type]
+    @asset.matter_id = params.fetch("matter_id")
+    @asset.description = params.fetch("description")
+    @asset.asset_type = params.fetch("asset_type")
+    @asset.ticker = params.fetch("ticker")
+    @asset.account_number = params.fetch("account_number")
+    @asset.institution = params.fetch("institution")
+    @asset.account_type = params.fetch("account_type")
 
-    save_status = @asset.save
+    if @asset.valid?
+      @asset.save
 
-    if save_status == true
-      referer = URI(request.referer).path
-
-      case referer
-      when "/assets/new", "/create_asset"
-        redirect_to("/assets")
-      else
-        redirect_back(:fallback_location => "/", :notice => "Asset created successfully.")
-      end
+      redirect_back(:fallback_location => "/assets", :notice => "Asset created successfully.")
     else
-      render("assets/new.html.erb")
+      render("asset_templates/new_form_with_errors.html.erb")
     end
   end
 
-  def edit
-    @asset = Asset.find(params[:id])
+  def create_row_from_matter
+    @asset = Asset.new
 
-    render("assets/edit.html.erb")
-  end
+    @asset.matter_id = params.fetch("matter_id")
+    @asset.description = params.fetch("description")
+    @asset.asset_type = params.fetch("asset_type")
+    @asset.ticker = params.fetch("ticker")
+    @asset.account_number = params.fetch("account_number")
+    @asset.institution = params.fetch("institution")
+    @asset.account_type = params.fetch("account_type")
 
-  def update
-    @asset = Asset.find(params[:id])
+    if @asset.valid?
+      @asset.save
 
-    @asset.matter_id = params[:matter_id]
-    @asset.beg_value = params[:beg_value]
-    @asset.end_value = params[:end_value]
-    @asset.description = params[:description]
-    @asset.beg_shares = params[:beg_shares]
-    @asset.end_shares = params[:end_shares]
-    @asset.beg_date = params[:beg_date]
-    @asset.asset_type = params[:asset_type]
-
-    save_status = @asset.save
-
-    if save_status == true
-      referer = URI(request.referer).path
-
-      case referer
-      when "/assets/#{@asset.id}/edit", "/update_asset"
-        redirect_to("/assets/#{@asset.id}", :notice => "Asset updated successfully.")
-      else
-        redirect_back(:fallback_location => "/", :notice => "Asset updated successfully.")
-      end
+      redirect_to("/matters/#{@asset.matter_id}", notice: "Asset created successfully.")
     else
-      render("assets/edit.html.erb")
+      render("asset_templates/new_form_with_errors.html.erb")
     end
   end
 
-  def destroy
-    @asset = Asset.find(params[:id])
+  def edit_form
+    @asset = Asset.find(params.fetch("prefill_with_id"))
+
+    render("asset_templates/edit_form.html.erb")
+  end
+
+  def update_row
+    @asset = Asset.find(params.fetch("id_to_modify"))
+
+    @asset.matter_id = params.fetch("matter_id")
+    @asset.description = params.fetch("description")
+    @asset.asset_type = params.fetch("asset_type")
+    @asset.ticker = params.fetch("ticker")
+    @asset.account_number = params.fetch("account_number")
+    @asset.institution = params.fetch("institution")
+    @asset.account_type = params.fetch("account_type")
+
+    if @asset.valid?
+      @asset.save
+
+      redirect_to("/assets/#{@asset.id}", :notice => "Asset updated successfully.")
+    else
+      render("asset_templates/edit_form_with_errors.html.erb")
+    end
+  end
+
+  def destroy_row_from_matter
+    @asset = Asset.find(params.fetch("id_to_remove"))
 
     @asset.destroy
 
-    if URI(request.referer).path == "/assets/#{@asset.id}"
-      redirect_to("/", :notice => "Asset deleted.")
-    else
-      redirect_back(:fallback_location => "/", :notice => "Asset deleted.")
-    end
+    redirect_to("/matters/#{@asset.matter_id}", notice: "Asset deleted successfully.")
+  end
+
+  def destroy_row
+    @asset = Asset.find(params.fetch("id_to_remove"))
+
+    @asset.destroy
+
+    redirect_to("/assets", :notice => "Asset deleted successfully.")
   end
 end

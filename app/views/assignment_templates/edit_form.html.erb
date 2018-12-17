@@ -1,0 +1,43 @@
+<h1>
+  Edit assignment #<%= @assignment.id %>
+</h1>
+
+<hr>
+
+<form action="/update_assignment/<%= @assignment.id %>" method="post">
+
+  <div class="form-group">
+    <label for="role">
+      Role
+    </label>
+
+    <input type="text" id="role" name="role" class="form-control" value="<%= @assignment.role %>">
+  </div>
+
+
+  <div class="form-group">
+    <label for="matter_id">
+      Matter
+    </label>
+
+    <%= select_tag(:matter_id, options_from_collection_for_select(Matter.all, :id, :matter_type, @assignment.matter_id), :class => "form-control") %>
+  </div>
+
+  <div class="form-group">
+    <label for="organization_id">
+      Organization
+    </label>
+
+    <%= select_tag(:organization_id, options_from_collection_for_select(Organization.all, :id, :name, @assignment.organization_id), :class => "form-control") %>
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update assignment
+  </button>
+</form>
+
+<hr>
+
+<a href="/assignments">
+  Go back
+</a>

@@ -1,0 +1,153 @@
+<%= search_form_for @q, :class => collapse_search_form, :id => "transactions_filters" do |f| %>
+  <p class="lead">Narrow results:</p>
+
+  <div class="form-group">
+    <%= f.label :distribution_eq, "Distribution" %>
+    <div>
+      <label class="radio-inline">
+        <%= f.radio_button :distribution_eq, "1", checked: ((params[:q] && params[:q][:distribution_eq]) == "1" ? "checked" : "") %> Yes
+      </label>
+      <label class="radio-inline">
+        <%= f.radio_button :distribution_eq, "0", checked: ((params[:q] && params[:q][:distribution_eq]) == "0" ? "checked" : "")%> No
+      </label>
+      <label class="radio-inline">
+        <%= f.radio_button :distribution_eq, ""%> Either
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :payee_cont, "Payee contains" %>
+    <%= f.text_field :payee_cont, :class => "form-control", :placeholder => "Payee contains" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description_cont, "Description contains" %>
+    <%= f.text_field :description_cont, :class => "form-control", :placeholder => "Description contains" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :category_cont, "Category contains" %>
+    <%= f.text_field :category_cont, :class => "form-control", :placeholder => "Category contains" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :amount, "Amount" %>
+    <div class="row">
+      <div class='col-md-6 mb-1'>
+        <%= f.text_field :amount_gteq, :class => "form-control", :placeholder => "Amount greater than or equal to" %>
+      </div>
+      <div class='col-md-6'>
+        <%= f.text_field :amount_lteq, :class => "form-control", :placeholder => "Amount less than or equal to" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :date, "Date" %>
+    <div class="row">
+      <div class='col-md-6 mb-1'>
+        <div class='input-group date' id='dategteqPicker' data-target-input="nearest">
+          <%= f.text_field :date_gteq, :class => "form-control datetimepicker-input", :placeholder => "Date greater than or equal to", :data => {:target => '#dategteqPicker'} %>
+          <div class="input-group-append" data-target='#dategteqPicker' data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class='col-md-6'>
+        <div class='input-group date' id='datelteqPicker' data-target-input="nearest">
+          <%= f.text_field :date_lteq, :class => "form-control datetimepicker-input", :placeholder => "Date less than or equal to", :data => {:target => '#datelteqPicker'} %>
+          <div class="input-group-append" data-target='#datelteqPicker' data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+      $(function () {
+          $('#dategteqPicker').datetimepicker({
+              format: 'MM/DD/YYYY'
+          });
+          $('#datelteqPicker').datetimepicker({
+              useCurrent: false,
+              format: 'MM/DD/YYYY'
+          });
+          $('#dategteqPicker').on("dp.change", function (e) {
+              $('#datelteqPicker').data("DateTimePicker").minDate(e.date);
+          });
+          $('#datelteqPicker').on("dp.change", function (e) {
+              $('#dategteqPicker').data("DateTimePicker").maxDate(e.date);
+          });
+      });
+  </script>
+
+  <div class="form-group">
+    <%= f.label :shares, "Shares" %>
+    <div class="row">
+      <div class='col-md-6 mb-1'>
+        <%= f.text_field :shares_gteq, :class => "form-control", :placeholder => "Shares greater than or equal to" %>
+      </div>
+      <div class='col-md-6'>
+        <%= f.text_field :shares_lteq, :class => "form-control", :placeholder => "Shares less than or equal to" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :created_at, "Created at" %>
+    <div class="row">
+      <div class='col-md-6 mb-1'>
+        <div class='input-group date' id='created_atgteqPicker' data-target-input="nearest">
+          <%= f.text_field :created_at_gteq, :class => "form-control datetimepicker-input", :placeholder => "Created at greater than or equal to", :data => {:target => '#created_atgteqPicker'} %>
+          <div class="input-group-append" data-target='#created_atgteqPicker' data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class='col-md-6'>
+        <div class='input-group date' id='created_atlteqPicker' data-target-input="nearest">
+          <%= f.text_field :created_at_lteq, :class => "form-control datetimepicker-input", :placeholder => "Created at less than or equal to", :data => {:target => '#created_atlteqPicker'} %>
+          <div class="input-group-append" data-target='#created_atlteqPicker' data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+      $(function () {
+          $('#created_atgteqPicker').datetimepicker({
+              format: 'YYYY-MM-DD hh:mm:SS'
+          });
+          $('#created_atlteqPicker').datetimepicker({
+              useCurrent: false,
+              format: 'YYYY-MM-DD hh:mm:SS'
+          });
+          $('#created_atgteqPicker').on("dp.change", function (e) {
+              $('#created_atlteqPicker').data("DateTimePicker").minDate(e.date);
+          });
+          $('#created_atlteqPicker').on("dp.change", function (e) {
+              $('#created_atgteqPicker').data("DateTimePicker").maxDate(e.date);
+          });
+      });
+  </script>
+
+
+  <div class="form-group">
+    <%= f.label :matter_matter_type_cont, "Matter matter_type contains" %>
+    <%= f.text_field :matter_matter_type_cont, :class => "form-control", :placeholder => "Matter matter_type contains" %>
+  </div>
+
+
+  <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
+
+  <a href="/transactions" class="btn btn-outline-secondary btn-block mb-1">Clear filters</a>
+
+<% end %>
+
+<a class="btn btn-outline-secondary btn-block mb-1" data-toggle="collapse" href="#transactions_filters">
+  Show filters
+</a>

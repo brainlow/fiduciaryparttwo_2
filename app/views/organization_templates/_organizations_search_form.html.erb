@@ -1,0 +1,126 @@
+<%= search_form_for @q, :class => collapse_search_form, :id => "organizations_filters" do |f| %>
+  <p class="lead">Narrow results:</p>
+
+  <div class="form-group">
+    <%= f.label :name_cont, "Name contains" %>
+    <%= f.text_field :name_cont, :class => "form-control", :placeholder => "Name contains" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :user_id, "User" %>
+    <div class="row">
+      <div class='col-md-6 mb-1'>
+        <%= f.text_field :user_id_gteq, :class => "form-control", :placeholder => "User greater than or equal to" %>
+      </div>
+      <div class='col-md-6'>
+        <%= f.text_field :user_id_lteq, :class => "form-control", :placeholder => "User less than or equal to" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :url_cont, "Url contains" %>
+    <%= f.text_field :url_cont, :class => "form-control", :placeholder => "Url contains" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :created_at, "Created at" %>
+    <div class="row">
+      <div class='col-md-6 mb-1'>
+        <div class='input-group date' id='created_atgteqPicker' data-target-input="nearest">
+          <%= f.text_field :created_at_gteq, :class => "form-control datetimepicker-input", :placeholder => "Created at greater than or equal to", :data => {:target => '#created_atgteqPicker'} %>
+          <div class="input-group-append" data-target='#created_atgteqPicker' data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class='col-md-6'>
+        <div class='input-group date' id='created_atlteqPicker' data-target-input="nearest">
+          <%= f.text_field :created_at_lteq, :class => "form-control datetimepicker-input", :placeholder => "Created at less than or equal to", :data => {:target => '#created_atlteqPicker'} %>
+          <div class="input-group-append" data-target='#created_atlteqPicker' data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+      $(function () {
+          $('#created_atgteqPicker').datetimepicker({
+              format: 'YYYY-MM-DD hh:mm:SS'
+          });
+          $('#created_atlteqPicker').datetimepicker({
+              useCurrent: false,
+              format: 'YYYY-MM-DD hh:mm:SS'
+          });
+          $('#created_atgteqPicker').on("dp.change", function (e) {
+              $('#created_atlteqPicker').data("DateTimePicker").minDate(e.date);
+          });
+          $('#created_atlteqPicker').on("dp.change", function (e) {
+              $('#created_atgteqPicker').data("DateTimePicker").maxDate(e.date);
+          });
+      });
+  </script>
+
+
+  <div class="form-group">
+    <%= f.label :assignments_role_cont, "Assignment role contains" %>
+    <%= f.text_field :assignments_role_cont, :class => "form-control", :placeholder => "Assignment role contains" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :created_at, "User Created at" %>
+    <div class="row">
+      <div class='col-md-6 mb-1'>
+        <div class='input-group date' id='usersgteqcreated_atPicker' data-target-input="nearest">
+          <%= f.text_field :users_created_at_gteq, :class => "form-control datetimepicker-input", :placeholder => "User Created at greater than or equal to", :data => {:target => '#usersgteqcreated_atPicker'} %>
+          <div class="input-group-append" data-target='#usersgteqcreated_atPicker' data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class='col-md-6'>
+        <div class='input-group date' id='userslteqcreated_atPicker' data-target-input="nearest">
+          <%= f.text_field :users_created_at_lteq, :class => "form-control datetimepicker-input", :placeholder => "User Created at less than or equal to", :data => {:target => '#userslteqcreated_atPicker'} %>
+          <div class="input-group-append" data-target='#userslteqcreated_atPicker' data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+      $(function () {
+          $('#usersgteqcreated_atPicker').datetimepicker({
+              format: 'YYYY-MM-DD hh:mm:SS'
+          });
+          $('#userslteqcreated_atPicker').datetimepicker({
+              useCurrent: false,
+              format: 'YYYY-MM-DD hh:mm:SS'
+          });
+          $('#usersgteqcreated_atPicker').on("dp.change", function (e) {
+              $('#userslteqcreated_atPicker').data("DateTimePicker").minDate(e.date);
+          });
+          $('#userslteqcreated_atPicker').on("dp.change", function (e) {
+              $('#usersgteqcreated_atPicker').data("DateTimePicker").maxDate(e.date);
+          });
+      });
+  </script>
+
+  <div class="form-group">
+    <%= f.label :matters_matter_type_cont, "Matter matter_type contains" %>
+    <%= f.text_field :matters_matter_type_cont, :class => "form-control", :placeholder => "Matter matter_type contains" %>
+  </div>
+
+
+  <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
+
+  <a href="/organizations" class="btn btn-outline-secondary btn-block mb-1">Clear filters</a>
+
+<% end %>
+
+<a class="btn btn-outline-secondary btn-block mb-1" data-toggle="collapse" href="#organizations_filters">
+  Show filters
+</a>

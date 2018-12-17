@@ -1,0 +1,51 @@
+<h1>
+  Add a new asset value
+</h1>
+
+
+<hr>
+
+<form action="/create_asset_value" method="post">
+
+  <div class="form-group">
+    <label for="asset_id">
+      Asset
+    </label>
+
+    <%= select_tag(:asset_id, options_from_collection_for_select(Asset.all, :id, :matter_id, @asset_value.asset_id), :class => "form-control") %>
+  </div>
+
+  <div class="form-group">
+    <label for="date">
+      Date
+    </label>
+
+    <input type="text" id="date" name="date" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="amount">
+      Amount
+    </label>
+
+    <input type="text" id="amount" name="amount" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="shares">
+      Shares
+    </label>
+
+    <input type="text" id="shares" name="shares" class="form-control">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create asset value
+  </button>
+</form>
+
+<hr>
+
+<a href="/asset_values">
+  Go back
+</a>

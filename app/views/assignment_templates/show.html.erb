@@ -1,0 +1,88 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      Assignment #<%= @assignment.id %> details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/assignments" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <% if current_user == @assignment.user %>
+          <a href="/assignments/<%= @assignment.id %>/edit" class="btn btn-block btn-sm btn-outline-secondary">
+            Edit assignment
+          </a>
+        <% end %>
+      </div>
+
+      <div class="col">
+        <% if current_user == @assignment.user %>
+          <a href="/delete_assignment/<%= @assignment.id %>" class="btn btn-block btn-sm btn-outline-secondary">
+            Delete assignment
+          </a>
+        <% end %>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Role
+      </dt>
+      <dd>
+        <%= @assignment.role %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <% if @assignment.user.present? %>
+          <a href="/users/<%= @assignment.user_id %>">
+            <%= @assignment.user.created_at %>
+          </a>
+        <% end %>
+      </dd>
+
+      <dt>
+        Matter
+      </dt>
+      <dd>
+        <% if @assignment.matter.present? %>
+          <a href="/matters/<%= @assignment.matter_id %>">
+            <%= @assignment.matter.matter_type %>
+          </a>
+        <% end %>
+      </dd>
+
+      <dt>
+        Organization
+      </dt>
+      <dd>
+        <% if @assignment.organization.present? %>
+          <a href="/organizations/<%= @assignment.organization_id %>">
+            <%= @assignment.organization.name %>
+          </a>
+        <% end %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@assignment.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@assignment.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+

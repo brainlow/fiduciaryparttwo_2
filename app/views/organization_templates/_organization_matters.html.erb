@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    Matters
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <% @organization.matters.each do |matter| %>
+      <li class="list-group-item d-flex align-items-center justify-content-between">
+        <a href="/matters/<%= matter.id %>">
+          <%= matter.matter_type %>
+        </a>
+
+      </li>
+    <% end %>
+
+  </ul>
+</div>

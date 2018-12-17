@@ -1,0 +1,50 @@
+<h1>
+  Edit asset value #<%= @asset_value.id %>
+</h1>
+
+<hr>
+
+<form action="/update_asset_value/<%= @asset_value.id %>" method="post">
+
+  <div class="form-group">
+    <label for="asset_id">
+      Asset
+    </label>
+
+    <%= select_tag(:asset_id, options_from_collection_for_select(Asset.all, :id, :matter_id, @asset_value.asset_id), :class => "form-control") %>
+  </div>
+
+  <div class="form-group">
+    <label for="date">
+      Date
+    </label>
+
+    <input type="text" id="date" name="date" class="form-control" value="<%= @asset_value.date %>">
+  </div>
+
+  <div class="form-group">
+    <label for="amount">
+      Amount
+    </label>
+
+    <input type="text" id="amount" name="amount" class="form-control" value="<%= @asset_value.amount %>">
+  </div>
+
+  <div class="form-group">
+    <label for="shares">
+      Shares
+    </label>
+
+    <input type="text" id="shares" name="shares" class="form-control" value="<%= @asset_value.shares %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update asset value
+  </button>
+</form>
+
+<hr>
+
+<a href="/asset_values">
+  Go back
+</a>

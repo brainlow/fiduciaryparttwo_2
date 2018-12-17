@@ -1,0 +1,63 @@
+<form action="/create_transaction_from_asset" method="post">
+
+  <input type="hidden" name="asset_id" value="<%= @asset.id %>">
+
+  <div class="form-group">
+    <label for="shares">
+      Shares
+    </label>
+
+    <input type="text" id="shares" name="shares" class="form-control" value="<%= @transaction.shares %>">
+  </div>
+
+  <div class="form-group">
+    <label for="date">
+      Date
+    </label>
+
+    <input type="text" id="date" name="date" class="form-control" value="<%= @transaction.date %>">
+  </div>
+
+  <div class="form-group">
+    <label for="amount">
+      Amount
+    </label>
+
+    <input type="text" id="amount" name="amount" class="form-control" value="<%= @transaction.amount %>">
+  </div>
+
+  <div class="form-group">
+    <label for="category">
+      Category
+    </label>
+
+    <textarea id="category" name="category" class="form-control" rows="3"><%= @transaction.category %></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="description">
+      Description
+    </label>
+
+    <textarea id="description" name="description" class="form-control" rows="3"><%= @transaction.description %></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="payee">
+      Payee
+    </label>
+
+    <textarea id="payee" name="payee" class="form-control" rows="3"><%= @transaction.payee %></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="distribution">
+      Distribution
+    </label>
+    <input id="distribution" class="form-check-input" name="distribution" type="checkbox" <%= "checked" if @transaction.distribution %>>
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create transaction
+  </button>
+</form>
