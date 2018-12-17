@@ -1,0 +1,55 @@
+<% if @assignment.present? %>
+  <% if @assignment.errors.any? %>
+    <% @assignment.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new assignment
+</h1>
+
+
+<hr>
+
+<form action="/create_assignment" method="post">
+
+  <div class="form-group">
+    <label for="role">
+      Role
+    </label>
+
+    <input type="text" id="role" name="role" class="form-control" value="<%= @assignment.role %>">
+  </div>
+
+  <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+  <div class="form-group">
+    <label for="matter_id">
+      Matter
+    </label>
+
+    <%= select_tag(:matter_id, options_from_collection_for_select(Matter.all, :id, :matter_type, @assignment.matter_id), :class => "form-control") %>
+  </div>
+
+  <div class="form-group">
+    <label for="organization_id">
+      Organization
+    </label>
+
+    <%= select_tag(:organization_id, options_from_collection_for_select(Organization.all, :id, :name, @assignment.organization_id), :class => "form-control") %>
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create assignment
+  </button>
+</form>
+
+<hr>
+
+<a href="/assignments">
+  Go back
+</a>

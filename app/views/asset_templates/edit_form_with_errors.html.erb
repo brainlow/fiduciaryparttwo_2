@@ -1,0 +1,82 @@
+<% if @asset.errors.any? %>
+  <% @asset.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit asset #<%= @asset.id %>
+</h1>
+
+<hr>
+
+<form action="/update_asset/<%= @asset.id %>" method="post">
+
+  <div class="form-group">
+    <label for="matter_id">
+      Matter
+    </label>
+
+    <%= select_tag(:matter_id, options_from_collection_for_select(Matter.all, :id, :matter_type, @asset.matter_id), :class => "form-control") %>
+  </div>
+
+  <div class="form-group">
+    <label for="description">
+      Description
+    </label>
+
+    <input type="text" id="description" name="description" class="form-control" value="<%= @asset.description %>">
+  </div>
+
+  <div class="form-group">
+    <label for="asset_type">
+      Asset type
+    </label>
+
+    <input type="text" id="asset_type" name="asset_type" class="form-control" value="<%= @asset.asset_type %>">
+  </div>
+
+  <div class="form-group">
+    <label for="ticker">
+      Ticker
+    </label>
+
+    <input type="text" id="ticker" name="ticker" class="form-control" value="<%= @asset.ticker %>">
+  </div>
+
+  <div class="form-group">
+    <label for="account_number">
+      Account number
+    </label>
+
+    <input type="text" id="account_number" name="account_number" class="form-control" value="<%= @asset.account_number %>">
+  </div>
+
+  <div class="form-group">
+    <label for="institution">
+      Institution
+    </label>
+
+    <input type="text" id="institution" name="institution" class="form-control" value="<%= @asset.institution %>">
+  </div>
+
+  <div class="form-group">
+    <label for="account_type">
+      Account type
+    </label>
+
+    <input type="text" id="account_type" name="account_type" class="form-control" value="<%= @asset.account_type %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update asset
+  </button>
+</form>
+
+<hr>
+
+<a href="/assets">
+  Go back
+</a>

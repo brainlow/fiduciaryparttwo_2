@@ -1,0 +1,104 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      Transaction #<%= @transaction.id %> details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/transactions" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/transactions/<%= @transaction.id %>/edit" class="btn btn-block btn-outline-secondary">
+          Edit transaction
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/delete_transaction/<%= @transaction.id %>" class="btn btn-block btn-outline-secondary">
+          Delete transaction
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Asset
+      </dt>
+      <dd>
+        <% if @transaction.asset.present? %>
+          <a href="/assets/<%= @transaction.asset_id %>">
+            <%= @transaction.asset.matter_id %>
+          </a>
+        <% end %>
+      </dd>
+
+      <dt>
+        Shares
+      </dt>
+      <dd>
+        <%= @transaction.shares %>
+      </dd>
+
+      <dt>
+        Date
+      </dt>
+      <dd>
+        <%= @transaction.date %>
+      </dd>
+
+      <dt>
+        Amount
+      </dt>
+      <dd>
+        <%= @transaction.amount %>
+      </dd>
+
+      <dt>
+        Category
+      </dt>
+      <dd>
+        <%= @transaction.category %>
+      </dd>
+
+      <dt>
+        Description
+      </dt>
+      <dd>
+        <%= @transaction.description %>
+      </dd>
+
+      <dt>
+        Payee
+      </dt>
+      <dd>
+        <%= @transaction.payee %>
+      </dd>
+
+      <dt>
+        Distribution
+      </dt>
+      <dd>
+        <%= @transaction.distribution %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@transaction.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@transaction.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+

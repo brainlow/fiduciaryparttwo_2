@@ -1,0 +1,66 @@
+<% if @matter.errors.any? %>
+  <% @matter.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit matter #<%= @matter.id %>
+</h1>
+
+<hr>
+
+<form action="/update_matter/<%= @matter.id %>" method="post">
+
+  <div class="form-group">
+    <label for="matter_type">
+      Matter type
+    </label>
+
+    <input type="text" id="matter_type" name="matter_type" class="form-control" value="<%= @matter.matter_type %>">
+  </div>
+
+  <div class="form-group">
+    <label for="matter_name">
+      Matter name
+    </label>
+
+    <input type="text" id="matter_name" name="matter_name" class="form-control" value="<%= @matter.matter_name %>">
+  </div>
+
+  <div class="form-group">
+    <label for="matter_number">
+      Matter number
+    </label>
+
+    <input type="text" id="matter_number" name="matter_number" class="form-control" value="<%= @matter.matter_number %>">
+  </div>
+
+  <div class="form-group">
+    <label for="matter_state">
+      Matter state
+    </label>
+
+    <input type="text" id="matter_state" name="matter_state" class="form-control" value="<%= @matter.matter_state %>">
+  </div>
+
+  <div class="form-group">
+    <label for="matter_county">
+      Matter county
+    </label>
+
+    <input type="text" id="matter_county" name="matter_county" class="form-control" value="<%= @matter.matter_county %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update matter
+  </button>
+</form>
+
+<hr>
+
+<a href="/matters">
+  Go back
+</a>

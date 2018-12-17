@@ -1,0 +1,73 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      Occupation #<%= @occupation.id %> details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/occupations" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/occupations/<%= @occupation.id %>/edit" class="btn btn-block btn-outline-secondary">
+          Edit occupation
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/delete_occupation/<%= @occupation.id %>" class="btn btn-block btn-outline-secondary">
+          Delete occupation
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <% if @occupation.user.present? %>
+          <a href="/users/<%= @occupation.user_id %>">
+            <%= @occupation.user.created_at %>
+          </a>
+        <% end %>
+      </dd>
+
+      <dt>
+        Organization
+      </dt>
+      <dd>
+        <% if @occupation.organization.present? %>
+          <a href="/organizations/<%= @occupation.organization_id %>">
+            <%= @occupation.organization.name %>
+          </a>
+        <% end %>
+      </dd>
+
+      <dt>
+        Role
+      </dt>
+      <dd>
+        <%= @occupation.role %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@occupation.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@occupation.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+

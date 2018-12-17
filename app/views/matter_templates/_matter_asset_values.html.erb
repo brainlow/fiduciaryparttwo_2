@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    Asset Values
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <% @matter.asset_values.each do |asset_value| %>
+      <li class="list-group-item d-flex align-items-center justify-content-between">
+        <a href="/asset_values/<%= asset_value.id %>">
+          <%= asset_value.asset_id %>
+        </a>
+
+      </li>
+    <% end %>
+
+  </ul>
+</div>

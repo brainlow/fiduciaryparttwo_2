@@ -1,103 +1,72 @@
 class MattersController < ApplicationController
-  before_action :current_user_must_be_matter_user, :only => [:show, :edit, :update, :destroy]
-
-  def current_user_must_be_matter_user
-    matter = Matter.find(params[:id])
-
-    unless current_user == matter.user
-      redirect_to :back, :alert => "You are not authorized for that."
-    end
-  end
-
   def index
-    @q = current_user.matters.ransack(params[:q])
-    @matters = @q.result(:distinct => true).includes(:user, :assets, :fiduciaries, :beneficiaries).page(params[:page]).per(10)
+    @q = Matter.ransack(params[:q])
+    @matters = @q.result(:distinct => true).includes(:assets, :matter_joins, :organizations, :asset_values, :transactions, :users).page(params[:page]).per(10)
 
-    render("matters/index.html.erb")
+    render("matter_templates/index.html.erb")
   end
 
   def show
-    @beneficiary = Beneficiary.new
-    @fiduciary = Fiduciary.new
+    @assignment = Assignment.new
     @asset = Asset.new
-    @matter = Matter.find(params[:id])
+    @matter = Matter.find(params.fetch("id_to_display"))
 
-    render("matters/show.html.erb")
+    render("matter_templates/show.html.erb")
   end
 
-  def new
+  def new_form
     @matter = Matter.new
 
-    render("matters/new.html.erb")
+    render("matter_templates/new_form.html.erb")
   end
 
-  def create
+  def create_row
     @matter = Matter.new
 
-    @matter.matter_type = params[:matter_type]
-    @matter.matter_name = params[:matter_name]
-    @matter.matter_number = params[:matter_number]
-    @matter.user_id = params[:user_id]
-    @matter.state = params[:state]
-    @matter.county = params[:county]
+    @matter.matter_type = params.fetch("matter_type")
+    @matter.matter_name = params.fetch("matter_name")
+    @matter.matter_number = params.fetch("matter_number")
+    @matter.matter_state = params.fetch("matter_state")
+    @matter.matter_county = params.fetch("matter_county")
 
-    save_status = @matter.save
+    if @matter.valid?
+      @matter.save
 
-    if save_status == true
-      referer = URI(request.referer).path
-
-      case referer
-      when "/matters/new", "/create_matter"
-        redirect_to("/matters")
-      else
-        redirect_back(:fallback_location => "/", :notice => "Matter created successfully.")
-      end
+      redirect_back(:fallback_location => "/matters", :notice => "Matter created successfully.")
     else
-      render("matters/new.html.erb")
+      render("matter_templates/new_form_with_errors.html.erb")
     end
   end
 
-  def edit
-    @matter = Matter.find(params[:id])
+  def edit_form
+    @matter = Matter.find(params.fetch("prefill_with_id"))
 
-    render("matters/edit.html.erb")
+    render("matter_templates/edit_form.html.erb")
   end
 
-  def update
-    @matter = Matter.find(params[:id])
+  def update_row
+    @matter = Matter.find(params.fetch("id_to_modify"))
 
-    @matter.matter_type = params[:matter_type]
-    @matter.matter_name = params[:matter_name]
-    @matter.matter_number = params[:matter_number]
-    @matter.user_id = params[:user_id]
-    @matter.state = params[:state]
-    @matter.county = params[:county]
+    @matter.matter_type = params.fetch("matter_type")
+    @matter.matter_name = params.fetch("matter_name")
+    @matter.matter_number = params.fetch("matter_number")
+    @matter.matter_state = params.fetch("matter_state")
+    @matter.matter_county = params.fetch("matter_county")
 
-    save_status = @matter.save
+    if @matter.valid?
+      @matter.save
 
-    if save_status == true
-      referer = URI(request.referer).path
-
-      case referer
-      when "/matters/#{@matter.id}/edit", "/update_matter"
-        redirect_to("/matters/#{@matter.id}", :notice => "Matter updated successfully.")
-      else
-        redirect_back(:fallback_location => "/", :notice => "Matter updated successfully.")
-      end
+      redirect_to("/matters/#{@matter.id}", :notice => "Matter updated successfully.")
     else
-      render("matters/edit.html.erb")
+      render("matter_templates/edit_form_with_errors.html.erb")
     end
   end
 
-  def destroy
-    @matter = Matter.find(params[:id])
+  def destroy_row
+    @matter = Matter.find(params.fetch("id_to_remove"))
 
     @matter.destroy
 
-    if URI(request.referer).path == "/matters/#{@matter.id}"
-      redirect_to("/", :notice => "Matter deleted.")
-    else
-      redirect_back(:fallback_location => "/", :notice => "Matter deleted.")
-    end
+    redirect_to("/matters", :notice => "Matter deleted successfully.")
   end
 end

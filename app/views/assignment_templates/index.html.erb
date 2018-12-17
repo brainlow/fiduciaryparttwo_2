@@ -1,0 +1,117 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h1>
+      All assignments
+    </h1>
+
+    <a href="/assignments/new" class="btn btn-block btn-outline-secondary">
+      Add a new assignment
+    </a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-3">
+    <%= render partial: "assignment_templates/assignments_search_form" %>
+  </div>
+</div>
+
+
+
+<hr>
+
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Role
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Matter
+        </th>
+
+        <th>
+          Organization
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @assignments.each do |assignment| %>
+      <tr>
+        <td>
+          <%= assignment.id %>
+        </td>
+
+        <td>
+          <%= assignment.role %>
+        </td>
+
+        <td>
+          <% if assignment.user.present? %>
+            <a href="/users/<%= assignment.user.id %>">
+              <%= assignment.user.created_at %>
+            </a>
+          <% end %>
+        </td>
+
+        <td>
+          <% if assignment.matter.present? %>
+            <a href="/matters/<%= assignment.matter.id %>">
+              <%= assignment.matter.matter_type %>
+            </a>
+          <% end %>
+        </td>
+
+        <td>
+          <% if assignment.organization.present? %>
+            <a href="/organizations/<%= assignment.organization.id %>">
+              <%= assignment.organization.name %>
+            </a>
+          <% end %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(assignment.created_at) %> ago
+        </td>
+
+        <td>
+          <%= time_ago_in_words(assignment.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/assignments/<%= assignment.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <%= paginate @assignments, theme: "twitter-bootstrap-4" %>
+      </div>
+    </div>
+
+  </div>
+</div>

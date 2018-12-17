@@ -1,0 +1,108 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      Matter #<%= @matter.id %> details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/matters" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/matters/<%= @matter.id %>/edit" class="btn btn-block btn-outline-secondary">
+          Edit matter
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/delete_matter/<%= @matter.id %>" class="btn btn-block btn-outline-secondary">
+          Delete matter
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Matter type
+      </dt>
+      <dd>
+        <%= @matter.matter_type %>
+      </dd>
+
+      <dt>
+        Matter name
+      </dt>
+      <dd>
+        <%= @matter.matter_name %>
+      </dd>
+
+      <dt>
+        Matter number
+      </dt>
+      <dd>
+        <%= @matter.matter_number %>
+      </dd>
+
+      <dt>
+        Matter state
+      </dt>
+      <dd>
+        <%= @matter.matter_state %>
+      </dd>
+
+      <dt>
+        Matter county
+      </dt>
+      <dd>
+        <%= @matter.matter_county %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@matter.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@matter.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <%= render partial: "matter_templates/matter_assets" %>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <%= render partial: "matter_templates/matter_matter_joins" %>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <%= render partial: "matter_templates/matter_organizations" %>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <%= render partial: "matter_templates/matter_asset_values" %>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <%= render partial: "matter_templates/matter_users" %>
+  </div>
+</div>

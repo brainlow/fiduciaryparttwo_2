@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    Users
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <% @organization.users.each do |user| %>
+      <li class="list-group-item d-flex align-items-center justify-content-between">
+        <a href="/users/<%= user.id %>">
+          <%= user.created_at %>
+        </a>
+
+      </li>
+    <% end %>
+
+  </ul>
+</div>

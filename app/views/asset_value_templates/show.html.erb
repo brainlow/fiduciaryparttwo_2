@@ -1,0 +1,81 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      Asset value #<%= @asset_value.id %> details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/asset_values" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/asset_values/<%= @asset_value.id %>/edit" class="btn btn-block btn-outline-secondary">
+          Edit asset value
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/delete_asset_value/<%= @asset_value.id %>" class="btn btn-block btn-outline-secondary">
+          Delete asset value
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Asset
+      </dt>
+      <dd>
+        <% if @asset_value.asset.present? %>
+          <a href="/assets/<%= @asset_value.asset_id %>">
+            <%= @asset_value.asset.matter_id %>
+          </a>
+        <% end %>
+      </dd>
+
+      <dt>
+        Date
+      </dt>
+      <dd>
+        <%= @asset_value.date %>
+      </dd>
+
+      <dt>
+        Amount
+      </dt>
+      <dd>
+        <%= @asset_value.amount %>
+      </dd>
+
+      <dt>
+        Shares
+      </dt>
+      <dd>
+        <%= @asset_value.shares %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@asset_value.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@asset_value.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <%= render partial: "asset_value_templates/asset_value_matter" %>
+  </div>
+</div>

@@ -1,0 +1,113 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      User #<%= @user.id %> details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/users" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/users/<%= @user.id %>/edit" class="btn btn-block btn-outline-secondary">
+          Edit user
+        </a>
+      </div>
+
+    </div>
+
+    <dl>
+      <dt>
+        First name
+      </dt>
+      <dd>
+        <%= @user.first_name %>
+      </dd>
+
+      <dt>
+        Last name
+      </dt>
+      <dd>
+        <%= @user.last_name %>
+      </dd>
+
+      <dt>
+        Mail address
+      </dt>
+      <dd>
+        <div>
+          <%= render partial: "user_templates/one_photo_map" %>
+        </div>
+      </dd>
+
+      <dt>
+        Isadmin
+      </dt>
+      <dd>
+        <%= @user.isadmin %>
+      </dd>
+
+      <dt>
+        Email
+      </dt>
+      <dd>
+        <%= @user.email %>
+      </dd>
+
+      <dt>
+        Password
+      </dt>
+      <dd>
+        <%= @user.password %>
+      </dd>
+
+      <dt>
+        Profile pic
+      </dt>
+      <dd>
+        <img src="<%= @user.profile_pic %>" class="img-fluid">
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@user.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@user.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <%= render partial: "user_templates/user_assignments" %>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <%= render partial: "user_templates/user_employees" %>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <%= render partial: "user_templates/user_organizations" %>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <%= render partial: "user_templates/user_matters" %>
+  </div>
+</div>
